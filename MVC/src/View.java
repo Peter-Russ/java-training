@@ -11,6 +11,8 @@ public class View extends JFrame implements ActionListener {
     private JButton rockBtn = new JButton(getImageByElement(ELEMENTS.ROCK));
     private JButton paperBtn = new JButton(getImageByElement(ELEMENTS.PAPER));
     private JButton scissorsBtn = new JButton(getImageByElement(ELEMENTS.SCISSORS));
+    private JButton lizardBtn = new JButton(getImageByElement(ELEMENTS.LIZARD));
+    private JButton spockBtn = new JButton(getImageByElement(ELEMENTS.SPOCK));
     private JLabel userPoints = new JLabel("0");
     private JLabel compPoints = new JLabel("0");
     private JLabel statusText = new JLabel(getTextByStatus(STATUS.NOONE_WINS));
@@ -25,7 +27,7 @@ public class View extends JFrame implements ActionListener {
     }
     private void initialize() {
         setTitle(TITLE);
-        setSize(550, 450);
+        setSize(500, 550);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
@@ -33,7 +35,8 @@ public class View extends JFrame implements ActionListener {
 
     private void setElements() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3, 3));
+        panel.setLayout(new GridLayout(4, 3));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panel.add(userPoints, BorderLayout.WEST);
         panel.add(statusText, BorderLayout.CENTER);
         panel.add(compPoints, BorderLayout.EAST);
@@ -43,10 +46,14 @@ public class View extends JFrame implements ActionListener {
         panel.add(rockBtn, BorderLayout.WEST);
         panel.add(paperBtn, BorderLayout.CENTER);
         panel.add(scissorsBtn, BorderLayout.EAST);
+        panel.add(lizardBtn, BorderLayout.WEST);
+        panel.add(spockBtn, BorderLayout.EAST);
         add(panel);
         rockBtn.addActionListener(this);
         paperBtn.addActionListener(this);
         scissorsBtn.addActionListener(this);
+        lizardBtn.addActionListener(this);
+        spockBtn.addActionListener(this);
     }
 
     public void changeView(ViewChange viewChange) {
@@ -66,6 +73,10 @@ public class View extends JFrame implements ActionListener {
             ctrl.actionOccurred(new Action(ELEMENTS.PAPER));
         } else if (e.getSource() == scissorsBtn) {
             ctrl.actionOccurred(new Action(ELEMENTS.SCISSORS));
+        } else if (e.getSource() == lizardBtn) {
+            ctrl.actionOccurred(new Action(ELEMENTS.LIZARD));
+        } else if (e.getSource() == spockBtn) {
+            ctrl.actionOccurred(new Action(ELEMENTS.SPOCK));
         }
     }
 
@@ -80,6 +91,12 @@ public class View extends JFrame implements ActionListener {
             case SCISSORS:
                 URL scissorsUrl = View.class.getResource(PATH + "scissors.png");
                 return new ImageIcon(scissorsUrl);
+            case LIZARD:
+                URL lizzardUrl = View.class.getResource(PATH + "lizzard.png");
+                return new ImageIcon(lizzardUrl);
+            case SPOCK:
+                URL spockUrl = View.class.getResource(PATH + "spock.png");
+                return new ImageIcon(spockUrl);
         }
         return null;
     }
