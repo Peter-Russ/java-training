@@ -1,8 +1,10 @@
 public class Action {
-    public enum ELEMENT {
-        ROCK,
-        PAPER,
-        SCISSORS
+    private ELEMENTS newSet;
+    public Action(ELEMENTS newSet) {
+        this.newSet = newSet;
+    }
+    public ELEMENTS getNewSet() {
+        return newSet;
     }
 
 }

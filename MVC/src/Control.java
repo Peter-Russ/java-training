@@ -8,6 +8,4 @@ public class Control {
         this.view = view;
     }
     public void actionOccurred(Action action) {
-        
-    }
 }
