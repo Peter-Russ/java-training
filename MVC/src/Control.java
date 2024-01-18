@@ -8,4 +8,7 @@ public class Control {
         this.view = view;
     }
     public void actionOccurred(Action action) {
+        ViewChange viewChange = model.updateModel(action);
+        view.changeView(viewChange);
+    }
 }
