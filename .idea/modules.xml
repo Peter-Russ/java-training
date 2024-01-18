@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ArrayComparison/ArrayComparison.iml" filepath="$PROJECT_DIR$/ArrayComparison/ArrayComparison.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BinearBitmap/BinearBitmap.iml" filepath="$PROJECT_DIR$/BinearBitmap/BinearBitmap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BitmapNew/BitmapNew.iml" filepath="$PROJECT_DIR$/BitmapNew/BitmapNew.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Bitmapshift/Bitmapshift.iml" filepath="$PROJECT_DIR$/Bitmapshift/Bitmapshift.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Caeser/Caeser.iml" filepath="$PROJECT_DIR$/Caeser/Caeser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CalcGUI/CalcGUI.iml" filepath="$PROJECT_DIR$/CalcGUI/CalcGUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EncryptGUI/EncryptGUI.iml" filepath="$PROJECT_DIR$/EncryptGUI/EncryptGUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FileRead/FileRead.iml" filepath="$PROJECT_DIR$/FileRead/FileRead.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GUI/GUI.iml" filepath="$PROJECT_DIR$/GUI/GUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modulo/Modulo.iml" filepath="$PROJECT_DIR$/Modulo/Modulo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Pruefungsaufgabe/Pruefungsaufgabe.iml" filepath="$PROJECT_DIR$/Pruefungsaufgabe/Pruefungsaufgabe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Random_Numbers/Random_Numbers.iml" filepath="$PROJECT_DIR$/Random_Numbers/Random_Numbers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RemoveDouble/RemoveDouble.iml" filepath="$PROJECT_DIR$/RemoveDouble/RemoveDouble.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SecondProject/SecondProject.iml" filepath="$PROJECT_DIR$/SecondProject/SecondProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zufallstabelle/Zufallstabelle.iml" filepath="$PROJECT_DIR$/Zufallstabelle/Zufallstabelle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/firstProject/firstProject.iml" filepath="$PROJECT_DIR$/firstProject/firstProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/java-training.iml" filepath="$PROJECT_DIR$/.idea/java-training.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/packages.iml" filepath="$PROJECT_DIR$/packages/packages.iml" />
+    </modules>
+  </component>
+</project>

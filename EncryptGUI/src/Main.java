@@ -4,6 +4,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Main extends JFrame {
     private JRadioButton encryptRadio;
@@ -27,24 +31,104 @@ public class Main extends JFrame {
         group.add(decryptRadio);
 
         keyInputText = new JTextField(10);
-        keyInputText.setBorder(margin);
 
         openFileButton = new JButton("File verarbeiten");
         openFileButton.setBorder(margin);
         openFileButton.addActionListener(new ActionListener() {
+            JFileChooser fc = new JFileChooser();
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implement file opening logic
+                int returnValue = fc.showOpenDialog(null);
+                File selectedFile = fc.getSelectedFile();
+
+                try (BufferedReader reader = new BufferedReader(new FileReader(selectedFile))) {
+                    StringBuilder strBuilder = new StringBuilder();
+                    String line;
+
+                    while ((line = reader.readLine()) != null) {
+                        strBuilder.append(line);
+                    }
+
+                    if (encryptRadio.isSelected()) {
+                        String selectedAlgo = (String) algoSelect.getSelectedItem();
+                        switch (selectedAlgo) {
+                            case "Caesar":
+                                CaeserChiffreText caesar = new CaeserChiffreText(keyInputText.getText());
+                                caesar.setKlartext(strBuilder.toString());
+                                caesar.doEncrypt();
+                                System.out.println(caesar.getCrypttext());
+                                break;
+                            case "Subst":
+                                SubstChiffreText subst = new SubstChiffreText(keyInputText.getText());
+                                subst.setKlartext(strBuilder.toString());
+                                subst.doEncrypt();
+                                System.out.println(subst.getCrypttext());
+                                break;
+                            case "Playfair":
+                                PlayfairChiffreText playfair = new PlayfairChiffreText(keyInputText.getText());
+                                playfair.setKlartext(strBuilder.toString());
+                                playfair.doEncrypt();
+                                System.out.println(playfair.getCrypttext());
+                                break;
+                            case "Polybios":
+                                PolybiosChiffreText polybios = new PolybiosChiffreText(keyInputText.getText());
+                                polybios.setKlartext(strBuilder.toString());
+                                polybios.doEncrypt();
+                                System.out.println(polybios.getCrypttext());
+                                break;
+                            default:
+                                System.out.println("No algorithm selected");
+                                break;
+                        }
+                    } else if (decryptRadio.isSelected()) {
+                        String selectedAlgo = (String) algoSelect.getSelectedItem();
+                        switch (selectedAlgo) {
+                            case "Caesar":
+                                CaeserChiffreText caesar = new CaeserChiffreText(keyInputText.getText());
+                                caesar.setCrypttext(strBuilder.toString());
+                                caesar.doDecrypt();
+                                System.out.println(caesar.getKlartext());
+                                break;
+                            case "Subst":
+                                SubstChiffreText subst = new SubstChiffreText(keyInputText.getText());
+                                subst.setCrypttext(strBuilder.toString());
+                                subst.doDecrypt();
+                                System.out.println(subst.getKlartext());
+                                break;
+                            case "Playfair":
+                                PlayfairChiffreText playfair = new PlayfairChiffreText(keyInputText.getText());
+                                playfair.setCrypttext(strBuilder.toString());
+                                //playfair.doDecrypt();
+                                System.out.println(playfair.getKlartext());
+                                break;
+                            case "Polybios":
+                                PolybiosChiffreText polybios = new PolybiosChiffreText(keyInputText.getText());
+                                polybios.setCrypttext(strBuilder.toString());
+                                polybios.doDecrypt();
+                                System.out.println(polybios.getKlartext());
+                                break;
+                            default:
+                                System.out.println("No algorithm selected");
+                                break;
+                        }
+
+                    } else {
+                        System.out.println("No option selected");
+                    }
+
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         });
 
-        String[] algorithms = {"1:1", "Caesar", "Subst"};
+        String[] algorithms = {"Caesar", "Subst", "Playfair", "Polybios"};
         algoSelect = new JComboBox<>(algorithms);
         algoSelect.setBorder(margin);
         algoSelect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implement algorithm selection logic
+
             }
         });
 
