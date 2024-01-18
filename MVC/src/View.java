@@ -1,99 +1,113 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.net.URL;
 
 public class View extends JFrame implements ActionListener {
-    private static final int WIDTH = 600;
-    private static final int HEIGHT = 400;
-    private static final double WIDTH_RATIO = 0.6;
-    private static final double HEIGHT_RATIO = 0.6;
-    private static final String TITLE = "Rock Paper Scissors";
-    private static final String PATH = "../.idea/img/";
-    private static final String[] IMG_NAMES = {"rock.png", "paper.png", "scissors.png", "ind.png", "smile.png", "sad.png"};
-    private static final String[] STATUS_TEXTS = {"No one wins", "You win", "Computer wins"};
-    private JButton[] buttons = new JButton[3];
+    private String TITLE = "Rock Paper Scissors";
+    private String PATH = "./img/";
+    private JButton rockBtn = new JButton(getImageByElement(ELEMENTS.ROCK));
+    private JButton paperBtn = new JButton(getImageByElement(ELEMENTS.PAPER));
+    private JButton scissorsBtn = new JButton(getImageByElement(ELEMENTS.SCISSORS));
+    private JLabel userPoints = new JLabel("0");
+    private JLabel compPoints = new JLabel("0");
+    private JLabel statusText = new JLabel(getTextByStatus(STATUS.NOONE_WINS));
+    private JLabel userInput = new JLabel(getImageByElement(ELEMENTS.ROCK));
+    private JLabel compInput = new JLabel(getImageByElement(ELEMENTS.ROCK));
+    private JLabel statusImg = new JLabel(getImageByStatus(STATUS.NOONE_WINS));
     private Control ctrl;
-    private ImageIcon[] images = new ImageIcon[6];
     public View(Control ctrl) {
         this.ctrl = ctrl;
         initialize();
-        preloadImages();
         setElements();
     }
     private void initialize() {
         setTitle(TITLE);
-        setSize(WIDTH, HEIGHT);
+        setSize(550, 450);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
-    private void preloadImages() {
-        for (int i = 0; i < IMG_NAMES.length; i++) {
-            images[i] = new ImageIcon(getImage(PATH + IMG_NAMES[i]));
-        }
-    }
-    private BufferedImage getImage(String path) {
-        
-    }
+
     private void setElements() {
-        getConstr(WIDTH, HEIGHT, WIDTH_RATIO, HEIGHT_RATIO);
-        for (int i = 0; i < buttons.length; i++) {
-            buttons[i] = new JButton(getImageByElement(ELEMENTS.values()[i]));
-            buttons[i].addActionListener(this);
-            add(buttons[i]);
-        }
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 3));
+        panel.add(userPoints, BorderLayout.WEST);
+        panel.add(statusText, BorderLayout.CENTER);
+        panel.add(compPoints, BorderLayout.EAST);
+        panel.add(userInput, BorderLayout.WEST);
+        panel.add(statusImg, BorderLayout.CENTER);
+        panel.add(compInput, BorderLayout.EAST);
+        panel.add(rockBtn, BorderLayout.WEST);
+        panel.add(paperBtn, BorderLayout.CENTER);
+        panel.add(scissorsBtn, BorderLayout.EAST);
+        add(panel);
+        rockBtn.addActionListener(this);
+        paperBtn.addActionListener(this);
+        scissorsBtn.addActionListener(this);
     }
-    private void getConstr(int width, int height, double widthRatio, double heightRatio) {
-        int x = (int) (width * (1 - widthRatio) / 2);
-        int y = (int) (height * (1 - heightRatio) / 2);
-        int w = (int) (width * widthRatio);
-        int h = (int) (height * heightRatio);
-        setBounds(x, y, w, h);
-    }
+
     public void changeView(ViewChange viewChange) {
-        buttons[viewChange.getUserSet().ordinal()].setIcon(getImageByStatus(viewChange.getStatusValue()));
-        buttons[viewChange.getCompSet().ordinal()].setIcon(getImageByStatus(viewChange.getStatusValue()));
-        JOptionPane.showMessageDialog(this, getTextByStatus(viewChange.getStatusValue()));
+        userPoints.setText(String.valueOf(viewChange.getPointsUser()));
+        compPoints.setText(String.valueOf(viewChange.getPointsComp()));
+        userInput.setIcon(getImageByElement(viewChange.getUserSet()));
+        compInput.setIcon(getImageByElement(viewChange.getCompSet()));
+        statusImg.setIcon(getImageByStatus(viewChange.getStatusValue()));
+        statusText.setText(getTextByStatus(viewChange.getStatusValue()));
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton) e.getSource();
-        if (button == buttons[0]) {
+        if (e.getSource() == rockBtn) {
             ctrl.actionOccurred(new Action(ELEMENTS.ROCK));
-        } else if (button == buttons[1]) {
+        } else if (e.getSource() == paperBtn) {
             ctrl.actionOccurred(new Action(ELEMENTS.PAPER));
-        } else { // button == buttons[2]
+        } else if (e.getSource() == scissorsBtn) {
             ctrl.actionOccurred(new Action(ELEMENTS.SCISSORS));
         }
     }
+
     private ImageIcon getImageByElement(ELEMENTS element) {
         switch(element) {
             case ROCK:
-                return images[0];
+                URL rockUrl = View.class.getResource(PATH + "rock.png");
+                return new ImageIcon(rockUrl);
             case PAPER:
-                return images[1];
-            default: // case SCISSORS
-                return images[2];
+                URL paperUrl = View.class.getResource(PATH + "paper.png");
+                return new ImageIcon(paperUrl);
+            case SCISSORS:
+                URL scissorsUrl = View.class.getResource(PATH + "scissors.png");
+                return new ImageIcon(scissorsUrl);
         }
+        return null;
     }
+
     private ImageIcon getImageByStatus(STATUS status) {
         switch(status) {
             case NOONE_WINS:
-                return images[3];
+                URL nooneUrl = View.class.getResource(PATH + "ind.png");
+                return new ImageIcon(nooneUrl);
             case USER_WINS:
-                return images[4];
-            default: // case COMP_WINS
-                return images[5];
+                URL userUrl = View.class.getResource(PATH + "smile.png");
+                return new ImageIcon(userUrl);
+            case COMP_WINS:
+                URL compUrl = View.class.getResource(PATH + "sad.png");
+                return new ImageIcon(compUrl);
         }
+        return null;
     }
+
     private String getTextByStatus(STATUS status) {
         switch(status) {
             case NOONE_WINS:
-                return STATUS_TEXTS[0];
+                return "No one wins";
             case USER_WINS:
-                return STATUS_TEXTS[1];
-            default: // case COMP_WINS
-                return STATUS_TEXTS[2];
+                return "You win";
+            case COMP_WINS:
+                return "Computer wins";
         }
+        return null;
     }
 }
