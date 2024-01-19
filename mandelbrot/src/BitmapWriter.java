@@ -20,7 +20,7 @@ public class BitmapWriter {
 		byte[] data = prepareBmp(body);
 		
 		try {
-			writeData(data, "C:\\temp\\my.bmp");
+			writeData(data, "C:\\Users\\peter\\Downloads\\my.bmp");
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
