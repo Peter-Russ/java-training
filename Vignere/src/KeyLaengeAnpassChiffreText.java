@@ -2,7 +2,6 @@ public abstract class KeyLaengeAnpassChiffreText extends ChiffreText {
     protected String angepassterSchluessel;
     public KeyLaengeAnpassChiffreText(String key) {
         super(key);
-        buildAngepassterSchluessel();
     }
 
     @Override
@@ -15,11 +14,19 @@ public abstract class KeyLaengeAnpassChiffreText extends ChiffreText {
         StringBuilder angepassterSchluessel = new StringBuilder();
         int keyLaenge = key.length();
         int klartextLaenge = klartext.length();
-        int i = 0;
-        while (i < klartextLaenge) {
+        if (keyLaenge == klartextLaenge) {
+            this.angepassterSchluessel = key;
+            return;
+        }
+        if (keyLaenge > klartextLaenge) {
+            for (int i = 0; i < klartextLaenge; i++) {
+                angepassterSchluessel.append(key.charAt(i));
+            }
+        }
+        for (int i = 0; i < klartextLaenge; i++) {
             angepassterSchluessel.append(key.charAt(i % keyLaenge));
-            i++;
         }
         this.angepassterSchluessel = angepassterSchluessel.toString();
+        System.out.println("angepassterSchluessel: " + angepassterSchluessel);
     }
 }

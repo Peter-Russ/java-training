@@ -13,7 +13,16 @@ public abstract class ChiffreText {
         return crypttext;
     }
     public void setKlarText(String klartext) {
-        this.klartext = klartext;
+        if (klartext.contains("ä")) {
+            klartext = klartext.replace("ä", "ae");
+        }
+        if (klartext.contains("ö")) {
+            klartext = klartext.replace("ö", "oe");
+        }
+        if (klartext.contains("ü")) {
+            klartext = klartext.replace("ü", "ue");
+        }
+        this.klartext = klartext.toLowerCase();
     }
     public String getKlartext() {
         return klartext;
