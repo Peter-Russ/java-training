@@ -12,6 +12,10 @@ public class Main {
         String klartext = JOptionPane.showInputDialog("Klartext:");
 
         ChiffreText myChiffre = ChiffreFactory.getChiffre(iSelectedAlgo, myKey);
-
+        myChiffre.setKlartext(klartext);
+        myChiffre.doEncrypt();
+        JOptionPane.showMessageDialog(null, "Verschlüsselter Text: " + myChiffre.getCrypttext());
+        myChiffre.doDecrypt();
+        JOptionPane.showMessageDialog(null, "Entschlüsselter Text: " + myChiffre.getKlartext());
     }
 }
