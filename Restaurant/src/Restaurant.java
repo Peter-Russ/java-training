@@ -3,11 +3,10 @@ abstract class Restaurant {
         System.out.println("Bestellung aufgenommen");
     }
 
-    protected abstract Mahlzeit mahlzeitZubereiten();
+    protected abstract void mahlzeitZubereiten();
 
     public void mahlzeitLiefern() {
         bestellungAufnehmen();
-        Mahlzeit mahlzeit = mahlzeitZubereiten();
         mahlzeitServieren();
     }
 

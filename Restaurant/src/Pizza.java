@@ -1,6 +1,6 @@
 public class Pizza extends Mahlzeit {
 
-    public Pizza() {
+    void mahlzeitZubereiten() {
         System.out.println("Pizza erstellt");
     }
 }

@@ -1,6 +1,6 @@
 public class Rostwurst extends Mahlzeit {
 
-    public Rostwurst() {
+    void mahlzeitZubereiten() {
         System.out.println("Rostwurst erstellt");
     }
 }

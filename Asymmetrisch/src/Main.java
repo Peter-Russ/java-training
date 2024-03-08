@@ -2,7 +2,6 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        /*
         String sDisplay = "";
         for (int i = 0; i < ChiffreFactory.getChiffreList().length; i++) {
             sDisplay += ChiffreFactory.getChiffreList()[i] + "(" + i + ")\n";
@@ -18,18 +17,5 @@ public class Main {
         JOptionPane.showMessageDialog(null, "Verschlüsselter Text: " + myChiffre.getCrypttext());
         myChiffre.doDecrypt();
         JOptionPane.showMessageDialog(null, "Entschlüsselter Text: " + myChiffre.getKlartext());
-    */
-
-
-        // Asymmetrische Chiffre
-        AsymChiffreText encrypter = new AsymChiffreText("EMU");
-        AsymChiffreText decrypter = new AsymChiffreText("FIR");
-
-        String klarText = "INFORMATIK";
-        encrypter.doEncrypt(klarText);
-
-        String chiffreText = "YJUCQBFFQH";
-        decrypter.doDecrypt(chiffreText);
     }
-
 }
